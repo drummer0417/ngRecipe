@@ -14,7 +14,7 @@ export class ShoppingListService{
             new Ingredient('Banana', 3)
        ]
     }
-
+    
     public getIngredients(){
         return this.ingredients.slice();
     }
@@ -23,6 +23,10 @@ export class ShoppingListService{
 
         this.ingredients.push(ingredient);
         this.ingredientsUpdated.emit(this.ingredients);
+    }
+
+    public addIngredients(ingredients: Ingredient[]){
+        this.ingredients.push(... ingredients);
     }
     
 }

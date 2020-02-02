@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Recipe } from './recipes/recipe.model';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'recipe'; 
+  title = 'recipe';
   selected = 'recipes';
-  
-  onComponentSelected(seleced: string){
+
+  onComponentSelected(seleced: string) {
     console.log('seleced: ' + seleced);
     this.selected = seleced;
   }
