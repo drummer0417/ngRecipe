@@ -7,14 +7,5 @@ import { Recipe } from '../recipes/recipe.model';
 })
 export class HeaderComponent implements OnInit {
     
-    @Output() componentSelected = new EventEmitter<string>();
-        
-    ngOnInit(): void {
-
-    }
-
-    onSelect(selectedComponent: string) {
-        console.log('geselecteerd: ' + selectedComponent);
-        this.componentSelected.emit(selectedComponent);
-    }
+    ngOnInit(): void {}
 }
