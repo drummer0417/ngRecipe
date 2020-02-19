@@ -69,23 +69,23 @@ export class RecipeService {
     addRecipe(recipe: Recipe) {
 
         this.recipes.push(recipe);
-        this.recipesUpdated.next(this.recipes.slice());
+        this.recipesUpdated.next(this.getRecipes());
     }
 
     updateRecipe(index: number, recipe: Recipe) {
 
         this.recipes[index] = recipe;
-        this.recipesUpdated.next(this.recipes.slice());
+        this.recipesUpdated.next(this.getRecipes());
     }
 
     deleteRecipe(index: number) {
         this.recipes.splice(index, 1);
-        this.recipesUpdated.next(this.recipes.slice());
+        this.recipesUpdated.next(this.getRecipes());
     }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
-        this.recipesUpdated.next(this.recipes.slice());
+        this.recipesUpdated.next(this.getRecipes());
     }
 
     getRecipe(id: number) {
