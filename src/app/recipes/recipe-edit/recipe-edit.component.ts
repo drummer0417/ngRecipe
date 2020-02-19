@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
@@ -37,7 +38,7 @@ export class RecipeEditComponent implements OnInit {
   }
   private initForm() {
 
-    let ingredients = new FormArray([]);
+    let ingredientsArray = new FormArray([]);
     let name = this.editMode ? this.recipe.name : '';
     let imagePath = this.editMode ? this.recipe.imagePath : '';
     let description = this.editMode ? this.recipe.description : '';
@@ -46,22 +47,22 @@ export class RecipeEditComponent implements OnInit {
       
       this.recipe.ingredients.forEach(
         (ingredient: Ingredient) => {
-          ingredients.push(new FormGroup({
+          ingredientsArray.push(new FormGroup({
             'name': new FormControl(ingredient.name, Validators.required),
-            'amount': new FormControl(ingredient.amoumt, [
+            'amount': new FormControl(ingredient.amount, [
               Validators.required,
               Validators.pattern(/^[1-9][0-9]*$/)
             ])
           }
           ))
         });
+        console.log(ingredientsArray);
     }
-
     this.recipeForm = new FormGroup({
       'name': new FormControl(name, Validators.required),
       'imagePath': new FormControl(imagePath, Validators.required),
       'description': new FormControl(description, Validators.required),
-      'ingredients': ingredients
+      'ingredients': ingredientsArray
     })
   }
 
@@ -76,12 +77,16 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
-	  this.router.navigate(['../'], { relativeTo: this.route})
+    this.onCancel();
+	  // this.router.navigate(['../'], { relativeTo: this.route})
   }
   
   onCancel(){
+    this.editMode = false;
+    this.recipeForm.reset();
     this.router.navigate(['../'], { relativeTo: this.route})
   }
+
   onAddIgredient() {
     const newIngredient = new FormGroup({
       'name': new FormControl('', Validators.required),
