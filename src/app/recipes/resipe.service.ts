@@ -6,13 +6,13 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
-    
+
     recipesUpdated = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {
-        
+
         this.recipes = [
             new Recipe("Tomatensoep",
                 "Overheerlijk soepje met lekkere verse tomatenklaar in een uur of 3 of 4 ofzo... ",
@@ -49,16 +49,16 @@ export class RecipeService {
                     new Ingredient('Boemboe groene curry pasta', 1),
                 ]
             ),
-            new Recipe('Friet met frandel speciaal', "Heerlijk zo'n vette hap af en toe",
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Patat_speciaal_and_frikandel_speciaal.jpg/800px-Patat_speciaal_and_frikandel_speciaal.jpg',
-            [
-                new Ingredient('Friet', 1),
-                new Ingredient('Friekandel', 2),
-                new Ingredient('Mayonaise', 2),
-                new Ingredient('Curry', 1),
-                new Ingredient('Gesnipperde uittjes', 50)
-            ]
-        )
+            new Recipe('Friet met frikandel speciaal', "Heerlijk zo'n vette hap af en toe",
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Patat_speciaal_and_frikandel_speciaal.jpg/800px-Patat_speciaal_and_frikandel_speciaal.jpg',
+                [
+                    new Ingredient('Friet', 1),
+                    new Ingredient('Friekandel', 2),
+                    new Ingredient('Mayonaise', 2),
+                    new Ingredient('Curry', 1),
+                    new Ingredient('Gesnipperde uittjes', 50)
+                ]
+            )
         ]
     }
 
@@ -67,19 +67,24 @@ export class RecipeService {
     }
 
     addRecipe(recipe: Recipe) {
-        
+
         this.recipes.push(recipe);
         this.recipesUpdated.next(this.getRecipes());
         console.log(this.recipes);
     }
-    
+
     updateRecipe(index: number, recipe: Recipe) {
-        
+
         this.recipes[index] = recipe;
         this.recipesUpdated.next(this.getRecipes());
         console.log(this.recipes);
     }
-    
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+        this.recipesUpdated.next(this.getRecipes());
+    }
+
     addIngredients(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
         this.recipesUpdated.next(this.getRecipes());
@@ -87,5 +92,10 @@ export class RecipeService {
 
     getRecipe(id: number) {
         return this.recipes[id];
+    }
+
+    deleteIngredient(recipeIndex: number, ingredientIndex: number) {
+        
+        this.recipes[recipeIndex].ingredients.splice(ingredientIndex, 1);
     }
 }

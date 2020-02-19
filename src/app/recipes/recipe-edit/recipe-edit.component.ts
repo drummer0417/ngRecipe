@@ -79,6 +79,11 @@ export class RecipeEditComponent implements OnInit {
 	  this.router.navigate(['../'], { relativeTo: this.route})
   }
   
+  onCancel(){
+    console.log('in onCancel()');
+    
+    this.router.navigate(['../'], { relativeTo: this.route})
+  }
   onAddIgredient() {
     const newIngredient = new FormGroup({
       'name': new FormControl('', Validators.required),
@@ -88,5 +93,9 @@ export class RecipeEditComponent implements OnInit {
       ])
     });
     (<FormArray>this.recipeForm.get('ingredients')).push(newIngredient);
+  } 
+
+  onDeleteIngredient(recipeIndex: number, ingredientIndex: number){
+    // Todo: this.recipeService.deleteIngredient(recipeIndex, ingredientIndex);
   }
 }
