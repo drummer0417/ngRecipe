@@ -9,12 +9,7 @@ export class ShoppingListService {
     public ingredientsUpdated = new Subject<Ingredient[]>();
     public startUpdateIngredient = new Subject<number>();
 
-    constructor() {
-        this.ingredients = [
-            new Ingredient("Appel", 5),
-            new Ingredient('Banana', 3)
-        ]
-    }
+    constructor() {}
 
     public getIngredients() {
         return this.ingredients.slice();

@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <button class="btn btn-success" type="submit" [disabled]="f.invalid">{{ inEditMode ? 'Update' : 'Add' }}</button>
-                    <button class="btn btn-danger" type="button" [disabled]="ingredientIndex === -1" (cick)="onDelete()">Delete</button>
+                    <button class="btn btn-danger" type="button" [disabled]="ingredientIndex === -1" (click)="onDelete()">Delete</button>
                     <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
                 </div>
             </div>

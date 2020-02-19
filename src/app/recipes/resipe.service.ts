@@ -93,9 +93,4 @@ export class RecipeService {
     getRecipe(id: number) {
         return this.recipes[id];
     }
-
-    deleteIngredient(recipeIndex: number, ingredientIndex: number) {
-        
-        this.recipes[recipeIndex].ingredients.splice(ingredientIndex, 1);
-    }
 }
