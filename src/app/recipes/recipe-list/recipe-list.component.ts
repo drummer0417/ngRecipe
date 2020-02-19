@@ -20,22 +20,13 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     private router: Router) { }
     
     ngOnInit() {
-      console.log('in onInit recipeList');
       
       this.recipes = this.recipeService.getRecipes();
-      
-      console.log(this.recipes);
       
       this.recipesUpdatedSubscription = this.recipeService.recipesUpdated.subscribe(
         (updatedRecipes: Recipe[]) => {
           this.recipes = updatedRecipes;
-          console.log('in recipesUpdatedSubscription');
-          
-          console.log(this.recipes);
-          
-        }
-        )
-        console.log(this.recipes);
+        })
       }
       
       onNewRecipe() {

@@ -11,9 +11,4 @@ import { RecipeService } from './recipes/resipe.service';
 export class AppComponent {
   title = 'recipe';
   selected = 'recipes';
-
-  // onComponentSelected(seleced: string) {
-  //   console.log('seleced: ' + seleced);
-  //   this.selected = seleced;
-  // }
 }

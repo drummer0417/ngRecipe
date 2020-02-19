@@ -36,7 +36,7 @@ export class RecipeEditComponent implements OnInit {
       this.initForm();
   }
   private initForm() {
-    console.log('in initForm()');
+
     let ingredients = new FormArray([]);
     let name = this.editMode ? this.recipe.name : '';
     let imagePath = this.editMode ? this.recipe.imagePath : '';
@@ -80,8 +80,6 @@ export class RecipeEditComponent implements OnInit {
   }
   
   onCancel(){
-    console.log('in onCancel()');
-    
     this.router.navigate(['../'], { relativeTo: this.route})
   }
   onAddIgredient() {

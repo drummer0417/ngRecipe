@@ -21,9 +21,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.ingredients = this.shoppingListService.getIngredients();
     this.ingredientsUpdatedSubscription = this.shoppingListService.ingredientsUpdated.subscribe( 
       updatedIngredients => {
-        console.log('igredients updated');
-        
-        console.log(this.ingredients);
+
         this.ingredients = updatedIngredients;
     });
   }
@@ -33,7 +31,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(ingredientId: number){
-    console.log(this.shoppingListService.getIngredient(ingredientId));
     this.shoppingListService.startUpdateIngredient.next(ingredientId);
   }
 }

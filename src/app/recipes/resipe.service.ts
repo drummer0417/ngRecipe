@@ -70,14 +70,12 @@ export class RecipeService {
 
         this.recipes.push(recipe);
         this.recipesUpdated.next(this.getRecipes());
-        console.log(this.recipes);
     }
 
     updateRecipe(index: number, recipe: Recipe) {
 
         this.recipes[index] = recipe;
         this.recipesUpdated.next(this.getRecipes());
-        console.log(this.recipes);
     }
 
     deleteRecipe(index: number) {
