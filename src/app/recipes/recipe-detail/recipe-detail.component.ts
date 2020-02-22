@@ -22,14 +22,12 @@ export class RecipeDetailComponent implements OnInit {
       ( params: Params) => {
         this.id = +params['id'];
         this.recipe = this.recipeService.getRecipe(this.id);
-        console.log(this.recipe);
       }
     )
   }
 
   onSelectShoppingList() {
-    console.log(this.recipe.ingredients);
-    
+
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
