@@ -10,8 +10,7 @@ export class RescipesResolverService implements Resolve<Recipe[]> {
     constructor(private recipeService: RecipeService){}
     
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
-        console.log('in resolve, aantal recipes is ' + this.recipeService.getRecipes().length) ;
-        
+       
         if (this.recipeService.getRecipes().length > 0 ) {
             return this.recipeService.getRecipes();
         } else {

@@ -17,10 +17,7 @@ export class DataStorageService{
     storeRecipes(recipes: Recipe[]){
 
         this.http.put(this.endpoint + 'recipes.json', recipes ).subscribe (
-            (response) => {
-                console.log('response');
-                console.log(response);
-            }
+            (response) => {}
         )
     }
 

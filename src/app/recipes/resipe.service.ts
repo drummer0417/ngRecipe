@@ -20,9 +20,7 @@ export class RecipeService implements OnInit {
         
     ngOnInit(): void {
         
-        console.log('onInit')
         this.fetchAllRecipes().subscribe();
-        console.log('#recipes: ' + this.recipes.length);
     }
 
     fetchAllRecipes(){         
@@ -30,8 +28,6 @@ export class RecipeService implements OnInit {
             .pipe( tap( recipes  => {
                 this.recipes = recipes;
                 this.recipesUpdated.next(this.getRecipes());
-                console.log('in fetchAllRecipes in recipeService')
-                console.log('#recipes: ' + this.recipes.length);
             }));
     }
     
