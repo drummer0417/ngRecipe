@@ -17,20 +17,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { ShortenPipe } from './pipes/shorten.pipe';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
+    AuthComponent,
     DropdownDirective,
-    RecipeStartComponent,
+    HeaderComponent,
+    LoadingSpinner,
+    RecipesComponent,
+    RecipeDetailComponent,
     RecipeEditComponent,
+    RecipeItemComponent,
+    RecipeListComponent,
+    ShoppingEditComponent,
+    ShoppingListComponent,
+    RecipeStartComponent,
     ShortenPipe
   ],
   imports: [
