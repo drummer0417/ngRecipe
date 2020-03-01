@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   databaseUrl: "https://ngrecipe-dev.firebaseio.com/",
-  firbasseSignUpUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp',
+  firebaseSignUpUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp',
+  firebaseSignInUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
   firebaseApiKey: "AIzaSyAyye9xSKv6nultGzL9jVxCx1kCNftPeNo"
 };
 

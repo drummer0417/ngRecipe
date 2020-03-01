@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { AuthResponse } from './auth.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +16,8 @@ export class AuthComponent implements OnInit {
   isLoading = false;
   error: string = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -22,35 +26,28 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(signInForm: NgForm) {
+    const email = signInForm.value.email;
+    const password = signInForm.value.password;
     this.error = null;
-    if (this.inLoginMode) {
-      this.login(signInForm);
-    } else {
-      this.signUp(signInForm);
-    }
-  }
-
-  login(signInForm: NgForm) {
-    const email = signInForm.value.email;
-    const password = signInForm.value.password;
-    throw new Error("Method not implemented.");
-  }
-
-  signUp(signInForm: NgForm) {
-    const email = signInForm.value.email;
-    const password = signInForm.value.password;
     this.isLoading = true;
-    console.log('isLoading: ' + this.isLoading);
 
-    this.authService.signUp(email, password).subscribe(
-      response => {
-        console.log(response);
+    let authObservable: Observable<AuthResponse>;
+    
+    if (this.inLoginMode) {
+      authObservable = this.authService.login(email, password);
+    } else {
+      authObservable = this.authService.signUp(email, password);
+    }
+    authObservable.subscribe(
+      (response: AuthResponse) => {
         signInForm.reset();
         this.isLoading = false;
-        console.log('isLoading: ' + this.isLoading);
+        console.log('login/signUp;  ' + response.email +  ' succesful');
+        console.log('response'+ JSON.stringify(response) );
+        
+        this.router.navigate(['/recipes'])
       },
       ( errorMessage: string) => {
-          console.log(errorMessage);
           this.error = errorMessage;
           this.isLoading = false;
       })
