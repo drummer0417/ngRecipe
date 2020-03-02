@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Sauce } from 'protractor/built/driverProviders';
 
 export interface AuthResponse {
     kind: string;
@@ -21,6 +22,8 @@ export class AuthService {
 
     firebaseApiKey = environment.firebaseApiKey;
     user = new BehaviorSubject<User>(null);
+
+    autoLogoffTimer: any;
 
     constructor(private http: HttpClient,
                 private router: Router) { }
@@ -57,20 +60,54 @@ export class AuthService {
                     return throwError(this.getErrorMessage(errorResponse));
                 }),
                 tap( (response: AuthResponse) => {
-                    const experationDate = 
-                        new Date(new Date().getTime() + ( +response.expiresIn * 1000 ));
+                    const expirationDate = 
+                        new Date(new Date().getTime() + ( +response.expiresIn * 1000 )); 
                     let user = new User(
                         response.email,
                         response.localId,
                         response.idToken,
-                        experationDate
-                        )          
+                        expirationDate
+                    )
                     this.user.next(user);
+                    localStorage.setItem('userData', JSON.stringify(user));
+                    this.autoLogout(user);
                 })
             );
     }
 
+    autoLogin(){
+        const savedUser : { 
+            email: string, 
+            id: string, 
+            _token: string, 
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('userData'));
+        if (savedUser) {
+            const user =
+                new User(savedUser.email, savedUser.id, savedUser._token, new Date(savedUser._tokenExpirationDate));
+            if (user.token) {
+                this.user.next(user);
+                this.autoLogout(user)                
+            }
+        }
+    }
+
+    private autoLogout(user: User){
+        
+        const millisecondsLeft = user.tokenExpirationDate.getTime() - new Date().getTime();
+        console.log("logout after: " + millisecondsLeft);
+        
+        this.autoLogoffTimer = setTimeout(() => {
+            this.logout();
+            console.log('autologoff triggerd now');
+        }, millisecondsLeft);
+    }
+
     logout(){
+        localStorage.removeItem('userData');
+        if (this.autoLogoffTimer) {
+            clearTimeout(this.autoLogoffTimer)
+        }
         this.user.next(null);
         this.router.navigate(['/auth']);
     }

@@ -19,9 +19,9 @@ export class AuthInterceptorService implements HttpInterceptor{
                 if (user === null) {
                     return next.handle(req);
                 }
-            let newRequest: HttpRequest<any> = req.clone(
+                let newRequest: HttpRequest<any> = req.clone(
                 {
-                    params: new HttpParams().set('auth', user.getToken())
+                    params: new HttpParams().set('auth', user.token)
                 }
             );
             return next.handle(newRequest);

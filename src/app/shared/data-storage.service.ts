@@ -29,7 +29,7 @@ export class DataStorageService {
     }
 
     fetchAllRecipes() {
-
+        
         return this.http.get<Recipe[]>(this.endpoint + 'recipes.json')
 
         // return this.http.get<Recipe[]>(this.endpoint + 'recipes.json',      

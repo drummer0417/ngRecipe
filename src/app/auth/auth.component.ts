@@ -41,10 +41,7 @@ export class AuthComponent implements OnInit {
     authObservable.subscribe(
       (response: AuthResponse) => {
         signInForm.reset();
-        this.isLoading = false;
-        console.log('login/signUp;  ' + response.email +  ' succesful');
-        console.log('response'+ JSON.stringify(response) );
-        
+        this.isLoading = false;       
         this.router.navigate(['/recipes'])
       },
       ( errorMessage: string) => {

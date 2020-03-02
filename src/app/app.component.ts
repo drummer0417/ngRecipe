@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipes/recipe.model';
 import { RecipeService } from './recipes/resipe.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,14 @@ export class AppComponent implements OnInit {
   
   constructor(
     private dataStorageService: DataStorageService,
-    private recipeService: RecipeService){
+    private recipeService: RecipeService,
+    private authService: AuthService){
   
     }
     
     ngOnInit(): void {
-      this.recipeService.fetchAllRecipes();
+      this.authService.autoLogin();
+      // this.recipeService.fetchAllRecipes();
     }
     
 }
