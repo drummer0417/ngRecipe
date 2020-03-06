@@ -21,16 +21,14 @@ export class DataStorageService {
 
     storeRecipes(recipes: Recipe[]){
 
-        console.log('in storeRecipes');
-
-        this.http.put(this.endpoint + 'recipes.json',
+        this.http.put(this.endpoint,
             recipes).subscribe ((response) => {}
         )
     }
 
     fetchAllRecipes() {
         
-        return this.http.get<Recipe[]>(this.endpoint + 'recipes.json')
+        return this.http.get<Recipe[]>(this.endpoint )
 
         // return this.http.get<Recipe[]>(this.endpoint + 'recipes.json',      
         //     {

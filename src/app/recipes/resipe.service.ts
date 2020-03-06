@@ -32,27 +32,11 @@ export class RecipeService implements OnInit {
                 this.recipes = recipes;
                 this.recipesUpdated.next(this.getRecipes());
             }));
-        // return this.authService.user.pipe(
-        //     take(1),
-        //     exhaustMap((user: User)  => {
-        //         console.log(JSON.stringify(user));
-
-        //         return this.dataStorageServie.fetchAllRecipes(user)
-        //             .pipe( tap( recipes  => {
-        //                 this.recipes = recipes;
-        //                 this.recipesUpdated.next(this.getRecipes());
-        //     }));
-        // }));
-
     }
 
 
     storeAllRecipes() {
-        console.log('storeAllRecipes()');
-
         this.dataStorageServie.storeRecipes(this.recipes);
-
-
     }
 
     getRecipes() {

@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  databaseUrl: "https://ngrecipe-dev.firebaseio.com/",
+  databaseUrl: "https://ngrecipe-dev.firebaseio.com/recipes.json",
   firebaseSignUpUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp',
   firebaseSignInUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
+  firebaseRefreshUrl: 'https://securetoken.googleapis.com/v1/token',
   firebaseApiKey: "AIzaSyAyye9xSKv6nultGzL9jVxCx1kCNftPeNo"
 };
 

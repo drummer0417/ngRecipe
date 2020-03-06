@@ -16,7 +16,7 @@ export class AuthInterceptorService implements HttpInterceptor{
             take(1), 
             exhaustMap(user => {
                 
-                if (user === null) {
+                if (user === null || req.url !== 'https://ngrecipe-dev.firebaseio.com/recipes.json') {
                     return next.handle(req);
                 }
                 let newRequest: HttpRequest<any> = req.clone(
