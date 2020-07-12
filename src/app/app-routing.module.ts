@@ -12,7 +12,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: 'recipes', pathMatch: 'full'},
+    { path: '', redirectTo: 'recipes', pathMatch: 'full'},  
     { path: 'recipes', component: RecipesComponent,canActivate: [AuthGuardService],
         children: [
             {path: '', component: RecipeStartComponent},
@@ -23,7 +23,8 @@ const appRoutes: Routes = [
         ]
     },
     { path: 'shopping-list', component: ShoppingListComponent},
-    { path: 'auth', component: AuthComponent}
+    { path: 'auth', component: AuthComponent},
+    { path: '**', redirectTo: 'recipes'}
 ];
 
 @NgModule({

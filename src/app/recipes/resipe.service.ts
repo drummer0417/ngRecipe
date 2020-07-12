@@ -23,7 +23,7 @@ export class RecipeService implements OnInit {
 
     ngOnInit(): void {
 
-        this.fetchAllRecipes().subscribe();
+        // this.fetchAllRecipes().subscribe();
     }
 
     fetchAllRecipes() {
@@ -33,7 +33,6 @@ export class RecipeService implements OnInit {
                 this.recipesUpdated.next(this.getRecipes());
             }));
     }
-
 
     storeAllRecipes() {
         this.dataStorageServie.storeRecipes(this.recipes);

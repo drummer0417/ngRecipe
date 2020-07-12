@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RecipeService } from '../recipes/resipe.service';
 import { Recipe } from '../recipes/recipe.model';
@@ -19,16 +19,24 @@ export class DataStorageService {
         private http: HttpClient,
         private authService: AuthService) { }
 
-    storeRecipes(recipes: Recipe[]){
+    storeRecipes(recipes: Recipe[]) {
 
         this.http.put(this.endpoint,
-            recipes).subscribe ((response) => {}
-        )
+            recipes).subscribe((response) => { }
+            )
     }
 
     fetchAllRecipes() {
-        
-        return this.http.get<Recipe[]>(this.endpoint )
+
+        let reqHeaders = new HttpHeaders({ 'wahDrinken...': 'koffie?' });
+        // reqHeaders.set({'wahDrinken...': 'koffie?'});
+        console.log('get recipies');
+        console.log(reqHeaders);
+
+        return this.http.get<Recipe[]>(this.endpoint,
+            {
+                headers: reqHeaders
+            })
 
         // return this.http.get<Recipe[]>(this.endpoint + 'recipes.json',      
         //     {
